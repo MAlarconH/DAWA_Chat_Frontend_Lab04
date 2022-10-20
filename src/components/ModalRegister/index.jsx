@@ -22,6 +22,9 @@ const ModalRegister = ({ fetchUsers }) => {
 
   const handleOnSubmit = async () => {
     const response = await post("/user", user);
+
+    localStorage.setItem("user", JSON.stringify(response.data))
+
     handleOpenModal();
     await fetchUsers();
   };
@@ -31,7 +34,7 @@ const ModalRegister = ({ fetchUsers }) => {
       <Modal
         title="Ingresa o registrate"
         open={isModalOpen}
-        onOk={handleOpenModal}
+        onOk={handleOnSubmit}
         onCancel={handleOpenModal}
       >
         <Space
